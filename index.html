@@ -1027,7 +1027,7 @@
             ytApiReady = true;
             event.target.setVolume(70);
             // Si el invitado tocó el sobre antes de que YouTube cargara, arranca ahora
-            if (wantsMusic && audioFileOk !== true) playYouTube();
+            if (wantsMusic && audioFileOk === false) playYouTube();
         }
 
         function onPlayerError(event) {
@@ -1175,14 +1175,26 @@
 
         function playBackgroundMusic() {
             wantsMusic = true;
-            // Si hay un musica.mp3 junto a la invitación, se usa ese
-            if (audioFileOk === true) {
+            // Primero se intenta musica.mp3 dentro del mismo toque del invitado.
+            // (iPhone no precarga audio, así que no se puede esperar a saber si existe)
+            if (audioFileOk !== false) {
                 const p = bgAudio.play();
                 setAudioUI(true);
-                if (p && p.then) p.then(fadeInAudio).catch(() => setAudioUI(false));
+                if (p && p.then) {
+                    p.then(() => {
+                        audioFileOk = true;
+                        fadeInAudio();
+                    }).catch(err => {
+                        setAudioUI(false);
+                        // Solo si el archivo no existe o no se puede leer, se usa YouTube
+                        if (err && err.name === 'NotAllowedError' && audioFileOk !== false) return;
+                        audioFileOk = false;
+                        playYouTube();
+                    });
+                }
                 return;
             }
-            // Si no, YouTube: se llama de inmediato para aprovechar el toque del invitado
+            // Sin mp3: YouTube, llamado de inmediato para aprovechar el toque del invitado
             if (location.protocol === 'file:') {
                 showToast('La música suena cuando la invitación está publicada en internet');
             }
