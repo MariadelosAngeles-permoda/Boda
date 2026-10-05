@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a1724">
+    <title>Boda Valentina & Juan Diego | Invitación Oficial</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        petroleum: {
+                            50: '#f0f5f9',
+                            100: '#e1ebd5',
+                            200: '#c5d7e5',
+                            600: '#234e70',
+                            700: '#193954',
+                            800: '#0f2337',
+                            900: '#0a1724',
+                        },
+                        gold: {
+                            200: '#f8f1d3',
+                            300: '#e6ca65',
+                            400: '#d4af37',
+                            500: '#aa882a',
+                            600: '#84671a'
+                        },
+                        cream: '#fdfbf7'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                        script: ['"Pinyon Script"', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #fdfbf7;
+            color: #0f2337;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
+            height: 100dvh;
+        }
+
+        /* Glassmorphic Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+        }
+
+        /* Ambient Stardust Canvas */
+        #stardustCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Responsive Safe Screen Heights */
+        /* Cada sección ocupa la pantalla; el padding inferior deja espacio a la flecha flotante */
+        .section-screen {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            padding-top: 4.5rem;
+            padding-bottom: 7rem;
+        }
+
+        @media (min-width: 640px) {
+            .section-screen {
+                padding-top: 4rem;
+                padding-bottom: 7.5rem;
+            }
+        }
+
+        /* Tipografía fluida para que los nombres quepan en cualquier celular */
+        .hero-names { font-size: clamp(1.75rem, 8vw, 3.75rem); }
+        .hero-surname { font-size: clamp(1.05rem, 4.6vw, 2.25rem); }
+        .hero-amp { font-size: clamp(2.5rem, 11vw, 4.5rem); }
+
+        /* Sobre interactivo: todo en porcentajes para que escale con el ancho */
+        .envelope-wrapper {
+            perspective: 1200px;
+            width: 100%;
+            max-width: min(380px, 88vw);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #0f2337;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.25);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            transform-style: preserve-3d;
+            animation: envelope-float 3.2s ease-in-out infinite;
+        }
+
+        .envelope.open {
+            animation: none;
+        }
+
+        @keyframes envelope-float {
+            0%, 100% { transform: translateY(0) rotate(-0.6deg); }
+            50% { transform: translateY(-8px) rotate(0.6deg); }
+        }
+
+        /* Solapa superior */
+        .envelope .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(180deg, #0a1724, #0d1e30);
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s 0.35s;
+            z-index: 10;
+            border-radius: 12px 12px 0 0;
+        }
+
+        /* Bolsillo inferior y laterales */
+        .envelope .pocket {
+            position: absolute;
+            inset: 0;
+            background: #193954;
+            clip-path: polygon(0 100%, 0 0, 50% 52%, 100% 0, 100% 100%);
+            border-radius: 0 0 12px 12px;
+            z-index: 4;
+        }
+
+        .envelope .pocket::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: #15304a;
+            clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+        }
+
+        /* Carta interior: oculta hasta abrir */
+        .envelope .letter {
+            position: absolute;
+            bottom: 6%;
+            left: 6%;
+            right: 6%;
+            height: 82%;
+            background: #fdfbf7;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            transition: transform 0.8s 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s 0.3s;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(10%);
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope.open .letter {
+            opacity: 1;
+            transform: translateY(-55%) scale(1.02);
+            z-index: 6;
+        }
+
+        /* Sello: posicionado por un contenedor para que la animación no lo descentre */
+        .seal-wrap {
+            position: absolute;
+            left: 50%;
+            top: 58%;
+            transform: translate(-50%, -50%);
+            z-index: 30;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .envelope.open .seal-wrap {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+            pointer-events: none;
+        }
+
+        /* Sello de lacre en forma de corazón con el logo de la pareja */
+        .heart-seal {
+            position: relative;
+            width: 52px;
+            height: 48px;
+            cursor: pointer;
+            animation: heart-pulse 2.6s ease-in-out infinite;
+        }
+        @media (min-width: 640px) {
+            .heart-seal { width: 62px; height: 57px; }
+        }
+        .heart-seal svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+        }
+        /* Halo dorado detrás del corazón (solo anima opacidad: liviano) */
+        .heart-seal::before {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.55) 0%, rgba(212, 175, 55, 0) 65%);
+            animation: heart-glow 2.6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes heart-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes heart-glow {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 0.9; }
+        }
+
+        /* Logo de la pareja (Logo.png recortado e incrustado) */
+        :root {
+            --couple-logo: url("data:image/png;base64,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");
+        }
+
+        /* Logo pintado con máscara: así toma el color que queramos */
+        .couple-logo {
+            -webkit-mask: var(--couple-logo) center / contain no-repeat;
+            mask: var(--couple-logo) center / contain no-repeat;
+            background-color: currentColor;
+        }
+        /* Logo en la pantalla de carga */
+        .preloader-logo {
+            width: 96px;
+            height: 118px;
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.55));
+            animation: logo-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) both, heart-pulse 2.6s 1.2s ease-in-out infinite;
+        }
+        @media (min-width: 640px) {
+            .preloader-logo { width: 112px; height: 138px; }
+        }
+        @keyframes logo-in {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Corazoncitos que salen al abrir el sobre */
+        .mini-heart {
+            position: fixed;
+            z-index: 45;
+            pointer-events: none;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 0 4px rgba(248, 241, 211, 0.6));
+        }
+
+        .gold-border {
+            border: 2px solid #d4af37;
+            position: relative;
+        }
+        .gold-border::before {
+            content: '';
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Equalizer Sound Waves Animation */
+        .bar {
+            width: 3px;
+            height: 100%;
+            background-color: #d4af37;
+            border-radius: 3px;
+            animation: sound-bounce 1.2s ease-in-out infinite alternate;
+        }
+        .bar:nth-child(1) { animation-delay: 0.1s; }
+        .bar:nth-child(2) { animation-delay: 0.3s; }
+        .bar:nth-child(3) { animation-delay: 0.5s; }
+
+        @keyframes sound-bounce {
+            0% { height: 20%; }
+            100% { height: 100%; }
+        }
+
+        /* ===== Animaciones de aparición al hacer scroll (ligeras: solo opacity/transform) ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+            transition-delay: var(--d, 0s);
+        }
+        .reveal.zoom { transform: scale(0.92); }
+        .reveal.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Línea dorada que se dibuja */
+        .gold-line {
+            transform: scaleX(0);
+            transition: transform 1.2s 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .in .gold-line, .gold-line.in { transform: scaleX(1); }
+
+        /* Latido suave del "&" */
+        .heartbeat {
+            display: inline-block;
+            animation: heartbeat 2.8s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            12% { transform: scale(1.12); }
+            24% { transform: scale(1); }
+            36% { transform: scale(1.08); }
+            48% { transform: scale(1); }
+        }
+
+        /* Brillo dorado que recorre el texto */
+        .shimmer {
+            background: linear-gradient(110deg, #aa882a 0%, #aa882a 40%, #f8f1d3 50%, #aa882a 60%, #aa882a 100%);
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shimmer 4.5s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 100% 0; }
+            100% { background-position: -150% 0; }
+        }
+
+        /* Pequeño "tic" cuando cambia un número del contador */
+        .tick { animation: tick 0.45s ease-out; }
+        @keyframes tick {
+            0% { transform: translateY(-6px); opacity: 0.3; }
+            100% { transform: none; opacity: 1; }
+        }
+
+        /* Iconos que flotan suavemente */
+        .float-soft { animation: float-soft 3.5s ease-in-out infinite; }
+        @keyframes float-soft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* ===== Flecha flotante: siempre visible abajo, sin necesidad de bajar ===== */
+        #floatingNav {
+            position: fixed;
+            left: 50%;
+            bottom: calc(14px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            z-index: 35;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        #floatingNav.hide {
+            opacity: 0;
+            transform: translate(-50%, 20px);
+            pointer-events: none;
+        }
+        #floatingNav .nav-label {
+            background: rgba(10, 23, 36, 0.88);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+        .nav-arrow-bob { animation: nav-bob 1.6s ease-in-out infinite; }
+        @keyframes nav-bob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
+        .nav-ring {
+            position: absolute;
+            inset: -5px;
+            border-radius: 9999px;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            animation: nav-ring 2s ease-out infinite;
+        }
+        @keyframes nav-ring {
+            0% { transform: scale(0.85); opacity: 1; }
+            100% { transform: scale(1.35); opacity: 0; }
+        }
+
+        /* Degradado detrás de la flecha: el texto se desvanece en lugar de chocar con ella */
+        #bottomFade {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: calc(96px + env(safe-area-inset-bottom));
+            background: linear-gradient(to top, rgba(253, 251, 247, 0.97) 45%, rgba(253, 251, 247, 0));
+            pointer-events: none;
+            z-index: 34;
+            transition: opacity 0.4s ease;
+        }
+        #bottomFade.hide { opacity: 0; }
+
+        /* Pantallas bajas (celulares pequeños): portada más compacta */
+        @media (max-height: 700px) and (max-width: 639px) {
+            .section-screen { padding-top: 3.75rem; gap: 1rem; }
+            .hero-names { font-size: clamp(1.6rem, 7.5vw, 2.2rem); }
+            .hero-surname { font-size: clamp(0.95rem, 4.2vw, 1.2rem); }
+            .hero-amp { font-size: clamp(2rem, 9vw, 2.6rem); }
+            #section-1 .float-soft { width: 3rem; height: 3rem; }
+        }
+
+        /* Indicadores de sección (puntos a la derecha) */
+        #sectionDots {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 35;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #sectionDots button {
+            width: 8px;
+            height: 8px;
+            border-radius: 9999px;
+            background: rgba(212, 175, 55, 0.35);
+            border: 1px solid rgba(170, 136, 42, 0.6);
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+        #sectionDots button.active {
+            height: 22px;
+            background: #d4af37;
+        }
+
+        /* Popup de datos bancarios */
+        .bank-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(10, 23, 36, 0.65);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        .bank-modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .bank-modal-card {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            background: #fdfbf7;
+            transform: translateY(24px) scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .bank-modal.open .bank-modal-card { transform: none; }
+
+        /* Opciones novio / novia */
+        .who-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 18px 8px 16px;
+            border-radius: 20px;
+            background: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 6px 16px rgba(15, 35, 55, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+        .who-option:hover,
+        .who-option:focus-visible {
+            transform: translateY(-3px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 22px rgba(212, 175, 55, 0.25);
+            outline: none;
+        }
+        .who-option:active { transform: scale(0.96); }
+        .who-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 9999px;
+            background: #0f2337;
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 4px;
+            transition: transform 0.3s ease;
+        }
+        .who-option:hover .who-icon { transform: scale(1.08); }
+
+        /* Sección de cierre: fondo azul a todo lo ancho de la pantalla */
+        .final-section {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            padding-left: 1.25rem;
+            padding-right: 1.25rem;
+            background: radial-gradient(ellipse at top, #193954 0%, #0f2337 45%, #0a1724 100%);
+        }
+        .final-logo {
+            width: 110px;
+            height: 136px;
+            filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
+        }
+        @media (min-width: 640px) {
+            .final-logo { width: 130px; height: 160px; }
+        }
+
+        /* Respeta a quien prefiere menos movimiento */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body class="locked antialiased selection:bg-gold-400 selection:text-white">
+
+    <!-- Ambient Stardust Canvas -->
+    <canvas id="stardustCanvas"></canvas>
+
+    <!-- Música: si existe "musica.mp3" junto a este archivo se usa (más confiable en iPhone);
+         si no, se usa YouTube como respaldo -->
+    <audio id="bgAudio" src="musica.mp3" loop preload="auto" playsinline></audio>
+
+    <!-- YouTube de respaldo: fuera de pantalla (no display:none, porque en móviles no reproduce) -->
+    <div id="youtube-player-container" aria-hidden="true" style="position:fixed; width:200px; height:200px; left:0; bottom:0; opacity:0; pointer-events:none; overflow:hidden; z-index:0;">
+        <div id="youtube-player"></div>
+    </div>
+
+    <!-- PRELOADER WITH VJ MONOGRAM EMBLEM -->
+    <div id="preloaderOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-petroleum-900 px-4 transition-opacity duration-1000">
+        <div class="relative flex items-center justify-center mb-7">
+            <div class="w-36 h-36 rounded-full bg-gold-400/10 absolute animate-ping"></div>
+            <!-- Logo de la pareja (Logo.png) -->
+            <div class="preloader-logo couple-logo text-gold-400"></div>
+        </div>
+        <h2 class="font-serif text-2xl sm:text-3xl text-cream font-light tracking-wide mb-2 text-center px-4">Valentina <span class="font-script text-gold-400 text-3xl">&</span> Juan Diego</h2>
+        <p class="text-gold-300/80 text-xs uppercase tracking-widest font-light flex items-center gap-2">
+            <i class="fas fa-spinner animate-spin text-gold-400"></i> Cargando experiencia...
+        </p>
+    </div>
+
+    <!-- AUDIO CONTROL BUTTON -->
+    <div id="audioControl" class="fixed right-3 sm:right-4 z-40 hidden" style="top: calc(12px + env(safe-area-inset-top));">
+        <button id="toggleAudioBtn" onclick="toggleAudio()" class="flex items-center gap-2 bg-petroleum-800/90 text-gold-400 px-3.5 py-2 rounded-full shadow-xl backdrop-blur-md hover:bg-petroleum-900 transition-all border border-gold-400/40 text-xs font-semibold active:scale-95">
+            <i id="audioIcon" class="fas fa-music text-xs"></i>
+            <span id="audioStatusText" class="tracking-wider uppercase text-cream text-[11px]">Música</span>
+            <div id="soundBars" class="flex items-end gap-0.5 h-3 w-2.5 ml-0.5 hidden">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </button>
+    </div>
+
+    <!-- ENVELOPE OVERLAY (CLOSED ENVELOPE WITH SEAL & LOGO, NO TEXT VISIBLE) -->
+    <div id="envelopeOverlay" class="fixed inset-0 z-40 flex flex-col items-center justify-between bg-petroleum-900 px-4 py-8 overflow-y-auto transition-opacity duration-1000 opacity-0 pointer-events-none">
+        
+        <!-- Header text above envelope (Generic Event Title, no internal details) -->
+        <div class="text-center max-w-lg px-2 mt-auto mb-4 sm:mb-6">
+            <span class="text-[10px] sm:text-xs tracking-widest uppercase text-gold-400/90 font-semibold bg-petroleum-800/80 px-4 py-1.5 rounded-full border border-gold-400/30">
+                <i class="fas fa-envelope mr-1.5"></i> Invitación Exclusiva
+            </span>
+            <h1 class="font-serif text-2xl sm:text-4xl text-cream tracking-wide uppercase font-light leading-tight mt-3">
+                Valentina <span class="font-script text-gold-400 lowercase text-3xl sm:text-4xl">&</span> Juan Diego
+            </h1>
+        </div>
+
+        <!-- Envelope Container -->
+        <div class="envelope-wrapper my-auto">
+            <div id="interactiveEnvelope" class="envelope cursor-pointer group" onclick="openEnvelope()">
+                <!-- Envelope Flap (Covers top half) -->
+                <div class="flap"></div>
+
+                <!-- Envelope Pocket (Covers bottom half) -->
+                <div class="pocket"></div>
+
+                <!-- Hidden Letter (Revealed only upon clicking) -->
+                <div class="letter flex flex-col items-center justify-center">
+                    <!-- Logo on Letter -->
+                    <div class="w-10 h-10 mb-1">
+                        <svg class="w-full h-full text-gold-500" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="100" cy="100" rx="68" ry="84" stroke="currentColor" stroke-width="3"/>
+                            <ellipse cx="100" cy="100" rx="62" ry="78" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M52 74 H68 M60 74 L90 136 L112 88" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M142 56 C120 56, 102 78, 88 100 C78 116, 90 128, 104 116 C116 104, 110 88, 92 102 L82 110 C68 126, 48 162, 56 174 C62 182, 82 178, 92 152" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <p class="font-serif text-base font-bold text-petroleum-900">¡Nos Casamos!</p>
+                    <p class="text-[11px] text-petroleum-600 font-semibold mt-0.5">Martes, 24 de Noviembre</p>
+                </div>
+
+                <!-- Wax Seal with Logo acting as physical seal over the envelope -->
+                <div class="seal-wrap">
+                    <div class="heart-seal" aria-label="Abrir invitación">
+                        <svg viewBox="0 0 100 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <defs>
+                                <radialGradient id="sealGold" cx="35%" cy="30%" r="75%">
+                                    <stop offset="0%" stop-color="#f8f1d3"/>
+                                    <stop offset="45%" stop-color="#e6ca65"/>
+                                    <stop offset="100%" stop-color="#aa882a"/>
+                                </radialGradient>
+                            </defs>
+                            <path d="M50 88 C22 68 4 52 4 30 C4 14 16 4 30 4 C40 4 47 10 50 17 C53 10 60 4 70 4 C84 4 96 14 96 30 C96 52 78 68 50 88 Z" fill="url(#sealGold)" stroke="#f8f1d3" stroke-width="1.2"/>
+                            <path d="M50 80 C26 63 11 49 11 31 C11 19 20 11 31 11 C40 11 46 17 50 24 C54 17 60 11 69 11 C80 11 89 19 89 31 C89 49 74 63 50 80 Z" fill="none" stroke="#84671a" stroke-opacity="0.45" stroke-width="0.8"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Envelope Action Button -->
+        <div class="mb-auto mt-4 text-center">
+            <button onclick="openEnvelope()" class="px-7 py-3.5 bg-gradient-to-r from-gold-400 to-gold-500 text-petroleum-900 font-bold rounded-full shadow-2xl hover:from-gold-300 hover:to-gold-400 active:scale-95 transition-all text-xs tracking-widest uppercase flex items-center gap-2.5 border border-gold-200">
+                <i class="fas fa-envelope-open text-sm animate-bounce"></i> Toca el sobre para abrir
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN INVITATION CONTENT -->
+    <main id="mainInvitation" class="opacity-0 transition-opacity duration-1000 max-w-4xl mx-auto px-5 sm:px-6">
+
+        <!-- SECTION 1: HERO & NAMES & NEW ROMANTIC QUOTE -->
+        <section id="section-1" class="section-screen relative" data-next-label="Ver Fecha y Hora">
+
+            <!-- Logo Header inside Invitation -->
+            <div class="reveal zoom">
+                <div class="float-soft w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-petroleum-900 border border-gold-400/60 flex items-center justify-center shadow-lg">
+                    <div class="couple-logo text-gold-400 w-[52%] h-[64%]"></div>
+                </div>
+            </div>
+
+            <div class="space-y-3 sm:space-y-6 w-full max-w-2xl text-center">
+                <div class="reveal" style="--d:.1s">
+                    <span class="text-[11px] sm:text-xs uppercase tracking-widest text-petroleum-700 bg-petroleum-50 px-4 sm:px-6 py-1.5 rounded-full font-medium border border-gold-400/30 shadow-sm inline-block">
+                        <i class="fas fa-heart text-gold-500 mr-1.5"></i> Nuestra Boda
+                    </span>
+                </div>
+
+                <h1 class="hero-names font-serif font-light text-petroleum-900 leading-tight tracking-wide">
+                    <span class="reveal block" style="--d:.25s">Laura Valentina<br><span class="hero-surname text-petroleum-700 font-normal">Martínez Morales</span></span>
+                    <span class="reveal zoom hero-amp font-script text-gold-500 font-normal my-0 sm:my-2 block leading-none" style="--d:.5s"><span class="heartbeat">&</span></span>
+                    <span class="reveal block" style="--d:.7s">Juan Diego<br><span class="hero-surname text-petroleum-700 font-normal">Gutiérrez Torres</span></span>
+                </h1>
+
+                <!-- NEW CUSTOM ROMANTIC QUOTE -->
+                <div class="px-1 reveal" style="--d:.9s">
+                    <p class="font-serif italic text-[15px] sm:text-xl text-petroleum-800 max-w-xl mx-auto leading-relaxed">
+                        "Hay momentos en la vida que son verdaderamente inolvidables, pero compartirlos con las personas que más amamos es lo que los hace eternos."
+                    </p>
+                </div>
+
+                <div class="reveal" style="--d:1s">
+                    <div class="gold-line w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto my-2 sm:my-5"></div>
+                    <p class="shimmer text-xs uppercase tracking-widest font-sans font-bold">Ceremonia Civil & Brindis</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: COUNTDOWN & CALENDAR -->
+        <section id="section-2" class="section-screen relative border-t border-gold-400/20" data-next-label="Ver Ubicación">
+            <div class="w-full text-center space-y-6">
+                <div class="reveal zoom glass-card rounded-3xl p-5 sm:p-10 text-center shadow-2xl border border-gold-400/30 relative overflow-hidden max-w-2xl mx-auto">
+                    <div class="absolute -top-10 -right-10 w-28 h-28 bg-gold-400/10 rounded-full blur-2xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-28 h-28 bg-petroleum-600/10 rounded-full blur-2xl"></div>
+
+                    <p class="reveal font-script text-3xl sm:text-4xl text-gold-500 mb-1" style="--d:.2s">Nos Casamos El</p>
+                    <h2 class="reveal font-serif text-2xl sm:text-4xl text-petroleum-900 font-semibold mb-1" style="--d:.3s">Martes, 24 de Noviembre</h2>
+                    <p class="text-xs font-sans text-gold-600 uppercase tracking-widest font-bold mb-5 sm:mb-8">6:00 PM</p>
+
+                    <!-- Countdown Cards -->
+                    <div class="reveal grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto mb-5 sm:mb-8" style="--d:.45s">
+                        <div class="bg-petroleum-900 text-cream p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-gold-400/20">
+                            <span id="cd-days" class="font-serif text-xl sm:text-3xl md:text-4xl font-bold text-gold-400 block">00</span>
+                            <span class="text-[9px] sm:text-xs font-sans uppercase tracking-wider text-gold-200">Días</span>
+                        </div>
+                        <div class="bg-petroleum-900 text-cream p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-gold-400/20">
+                            <span id="cd-hours" class="font-serif text-xl sm:text-3xl md:text-4xl font-bold text-gold-400 block">00</span>
+                            <span class="text-[9px] sm:text-xs font-sans uppercase tracking-wider text-gold-200">Horas</span>
+                        </div>
+                        <div class="bg-petroleum-900 text-cream p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-gold-400/20">
+                            <span id="cd-minutes" class="font-serif text-xl sm:text-3xl md:text-4xl font-bold text-gold-400 block">00</span>
+                            <span class="text-[9px] sm:text-xs font-sans uppercase tracking-wider text-gold-200">Min</span>
+                        </div>
+                        <div class="bg-petroleum-900 text-cream p-2 sm:p-4 rounded-xl sm:rounded-2xl shadow-lg border border-gold-400/20">
+                            <span id="cd-seconds" class="font-serif text-xl sm:text-3xl md:text-4xl font-bold text-gold-400 block">00</span>
+                            <span class="text-[9px] sm:text-xs font-sans uppercase tracking-wider text-gold-200">Seg</span>
+                        </div>
+                    </div>
+
+                    <button onclick="addToCalendar()" class="text-xs font-semibold text-petroleum-900 bg-gold-400/20 hover:bg-gold-400/40 border border-gold-400/60 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full transition-all inline-flex items-center gap-2 shadow-sm active:scale-95">
+                        <i class="far fa-calendar-plus text-gold-600"></i> Agregar a mi Google Calendar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: WHERE & WHEN (LUGAR DEL BRINDIS) -->
+        <section id="section-3" class="section-screen relative border-t border-gold-400/20" data-next-label="Código de Vestimenta">
+            <div class="w-full space-y-6 max-w-2xl">
+                <div class="reveal text-center mb-2">
+                    <p class="font-script text-3xl sm:text-4xl text-gold-500">¿Dónde Celebramos?</p>
+                    <h2 class="font-serif text-2xl sm:text-4xl text-petroleum-900 font-semibold">Lugar del Brindis</h2>
+                </div>
+
+                <div class="reveal glass-card rounded-3xl p-6 sm:p-10 shadow-xl text-center gold-border mx-auto" style="--d:.2s">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-petroleum-900 text-gold-400 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-xl border border-gold-400/40">
+                        <i class="fas fa-glass-cheers text-xl sm:text-2xl float-soft"></i>
+                    </div>
+
+                    <h3 class="font-serif text-2xl sm:text-3xl font-semibold text-petroleum-900 mb-1 sm:mb-2">Tragaluz Asia el Pacífico</h3>
+                    <p class="text-gold-600 font-bold text-xs sm:text-sm mb-4"><i class="fas fa-map-pin mr-1.5 text-gold-500"></i> Calle 70 # 8 - 25</p>
+                    
+                    <p class="text-petroleum-700 text-xs sm:text-sm max-w-md mx-auto mb-6 sm:mb-8 leading-relaxed">
+                        Acompáñanos a brindar y ser testigos de nuestra unión en una velada íntima, romántica y especial.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+                        <a href="https://maps.google.com/?q=Calle+70+%23+8+-+25" target="_blank" class="bg-petroleum-900 hover:bg-petroleum-800 text-cream px-5 py-3 rounded-full text-xs font-semibold uppercase tracking-wider shadow-lg transition-all flex items-center justify-center gap-2 border border-gold-400/30 active:scale-95">
+                            <i class="fas fa-directions text-gold-400"></i> Ver en Google Maps
+                        </a>
+                        <button onclick="copyAddress()" class="bg-cream hover:bg-petroleum-50 text-petroleum-900 border border-petroleum-200 px-5 py-3 rounded-full text-xs font-semibold uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 active:scale-95">
+                            <i class="far fa-copy text-gold-500"></i> Copiar Dirección
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: CÓDIGO DE VESTIMENTA -->
+        <section id="section-4" class="section-screen relative border-t border-gold-400/20" data-next-label="Lluvia de Sobres">
+            <div class="w-full space-y-6 max-w-xl">
+                <div class="reveal text-center mb-2">
+                    <p class="font-script text-3xl sm:text-4xl text-gold-500">Detalles Importantes</p>
+                    <h2 class="font-serif text-2xl sm:text-4xl text-petroleum-900 font-semibold">Código de Vestimenta</h2>
+                </div>
+
+                <div style="--d:.2s" class="reveal glass-card rounded-3xl p-7 sm:p-10 text-center shadow-xl gold-border">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-petroleum-900 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl border border-gold-400/40">
+                        <i class="fas fa-user-tie text-xl sm:text-2xl text-gold-400 float-soft"></i>
+                    </div>
+                    <p class="text-gold-600 font-bold text-xs sm:text-sm uppercase tracking-widest mb-4">Formal / Elegante</p>
+                    <p class="text-petroleum-700 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">
+                        Traje formal o vestido elegante. Reservamos los colores <strong class="font-semibold text-petroleum-900">blanco y gris</strong> exclusivamente para los novios.
+                    </p>
+                    <div class="gold-line w-20 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-6"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: LLUVIA DE SOBRES -->
+        <section id="section-5" class="section-screen relative border-t border-gold-400/20" data-next-label="Confirmar Asistencia">
+            <div class="w-full space-y-6 max-w-xl">
+                <div class="reveal text-center mb-2">
+                    <p class="font-script text-3xl sm:text-4xl text-gold-500">Con Cariño</p>
+                    <h2 class="font-serif text-2xl sm:text-4xl text-petroleum-900 font-semibold">Lluvia de Sobres</h2>
+                </div>
+
+                <div style="--d:.2s" class="reveal glass-card rounded-3xl p-7 sm:p-10 text-center shadow-xl gold-border">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-petroleum-900 rounded-full flex items-center justify-center mx-auto mb-5 shadow-xl border border-gold-400/40">
+                        <i class="fas fa-envelope-open-text text-xl sm:text-2xl text-gold-400 float-soft"></i>
+                    </div>
+                    <p class="text-gold-600 font-bold text-xs sm:text-sm uppercase tracking-widest mb-4">Tu presencia es nuestro regalo</p>
+                    <p class="text-petroleum-700 text-sm sm:text-base leading-relaxed max-w-sm mx-auto mb-6">
+                        Si deseas hacernos un detalle especial, tendremos un buzón el día del evento o puedes realizar tu regalo digitalmente.
+                    </p>
+                    <button onclick="openBankModal()" class="w-full sm:w-auto sm:px-8 py-3.5 px-4 bg-petroleum-900 hover:bg-petroleum-800 text-gold-400 font-semibold rounded-full shadow-lg transition-all text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 border border-gold-400/40 active:scale-95">
+                        <i class="fas fa-gift text-gold-300"></i> Ver Datos Bancarios
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: RSVP FORM -->
+        <section id="section-6" class="section-screen relative border-t border-gold-400/20" data-next-label="Un Mensaje para Ti">
+            <div class="w-full max-w-xl mx-auto">
+                <div class="reveal text-center mb-6">
+                    <p class="font-script text-3xl sm:text-4xl text-gold-500">¿Nos Acompañas?</p>
+                    <h2 class="font-serif text-2xl sm:text-4xl text-petroleum-900 font-semibold">Confirma tu Asistencia</h2>
+                </div>
+                <div style="--d:.2s" class="reveal glass-card rounded-3xl p-6 sm:p-10 shadow-2xl gold-border">
+                    <p class="text-petroleum-700 text-sm text-center mb-6">Confírmanos para guardarte un lugar muy especial.</p>
+
+                    <form id="rsvpForm" onsubmit="submitRSVP(event)" class="space-y-5">
+                        <div>
+                            <label for="guestName" class="block text-xs font-bold uppercase text-petroleum-900 mb-1.5">Tu Nombre *</label>
+                            <input type="text" id="guestName" required placeholder="Nombre y apellido" class="w-full px-4 sm:px-5 py-3 rounded-xl sm:rounded-2xl bg-white border border-petroleum-200 text-base sm:text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                        </div>
+
+                        <div>
+                            <label for="attendance" class="block text-xs font-bold uppercase text-petroleum-900 mb-1.5">¿Asistirás? *</label>
+                            <select id="attendance" required class="w-full px-4 sm:px-5 py-3 rounded-xl sm:rounded-2xl bg-white border border-petroleum-200 text-base sm:text-sm focus:outline-none focus:border-gold-400 transition-colors">
+                                <option value="¡Sí, ahí estaré!">¡Sí, ahí estaré!</option>
+                                <option value="Lo siento, no podré asistir">Lo siento, no podré asistir</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 px-4 bg-petroleum-900 hover:bg-petroleum-800 text-gold-400 font-semibold rounded-full shadow-xl transition-all text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2.5 border border-gold-400/40 active:scale-95 whitespace-nowrap">
+                            <i class="fab fa-whatsapp text-xl text-emerald-400"></i>
+                            <span>Confirmar por WhatsApp</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: CIERRE (pantalla completa) -->
+        <section id="section-7" class="section-screen final-section relative" data-next-label="Volver al Inicio">
+            <div class="w-full max-w-xl mx-auto text-center flex flex-col items-center">
+                <div class="reveal zoom">
+                    <div class="couple-logo final-logo text-gold-400"></div>
+                </div>
+
+                <p class="reveal font-script text-4xl sm:text-5xl text-gold-400 mt-6" style="--d:.25s">¡Te Esperamos!</p>
+
+                <p class="reveal font-serif italic text-lg sm:text-xl text-cream/90 leading-relaxed max-w-md mt-4" style="--d:.4s">
+                    Gracias por ser parte de nuestra historia. Será un honor celebrar este día tan especial contigo.
+                </p>
+
+                <div class="reveal w-full" style="--d:.55s">
+                    <div class="gold-line w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto my-6"></div>
+                    <h3 class="font-serif text-2xl sm:text-3xl text-cream font-light tracking-wide">
+                        Valentina <span class="font-script text-gold-400 heartbeat text-3xl sm:text-4xl">&amp;</span> Juan Diego
+                    </h3>
+                    <p class="text-[11px] sm:text-xs uppercase tracking-widest text-gold-300/90 mt-3">Martes 24 de Noviembre · 6:00 PM</p>
+                    <p class="text-[11px] sm:text-xs uppercase tracking-widest text-gold-300/90 mt-1">Tragaluz Asia el Pacífico</p>
+                </div>
+
+                <p class="reveal text-[11px] text-cream/50 mt-8 flex items-center gap-1.5" style="--d:.7s">
+                    Con todo nuestro amor <i class="fas fa-heart text-gold-400 heartbeat"></i>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLECHA FLOTANTE: siempre visible abajo y lleva a la siguiente sección -->
+    <div id="floatingNav" class="hide">
+        <button onclick="goNext()" class="group flex flex-col items-center gap-1.5 focus:outline-none active:scale-95 transition-transform">
+            <span id="navLabel" class="nav-label text-[10px] sm:text-[11px] font-sans font-semibold tracking-widest uppercase text-gold-300 px-3 py-1 rounded-full border border-gold-400/40 shadow-lg whitespace-nowrap">Ver Fecha y Hora</span>
+            <span class="relative w-11 h-11 rounded-full bg-petroleum-900 border border-gold-400/70 flex items-center justify-center shadow-xl">
+                <span class="nav-ring"></span>
+                <i id="navIcon" class="fas fa-chevron-down text-gold-400 text-sm nav-arrow-bob"></i>
+            </span>
+        </button>
+    </div>
+
+    <div id="bottomFade" class="hide"></div>
+
+    <!-- Puntos indicadores de sección -->
+    <nav id="sectionDots" class="hidden" aria-label="Secciones"></nav>
+
+    <!-- POPUP: DATOS BANCARIOS -->
+    <div id="bankModal" class="bank-modal" role="dialog" aria-modal="true" aria-labelledby="bankModalTitle" onclick="if (event.target === this) closeBankModal()">
+        <div class="bank-modal-card glass-card gold-border rounded-3xl p-7 sm:p-9 text-center shadow-2xl">
+            <button onclick="closeBankModal()" aria-label="Cerrar" class="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-petroleum-700 hover:bg-petroleum-50 active:scale-95 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="w-14 h-14 bg-petroleum-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-gold-400/40 shadow-lg">
+                <i class="fas fa-gift text-xl text-gold-400"></i>
+            </div>
+            <p class="font-script text-3xl text-gold-500">Gracias por tu detalle</p>
+            <h3 id="bankModalTitle" class="text-[11px] text-petroleum-600 uppercase font-bold tracking-widest mt-3">Llave para transferencia</h3>
+            <p class="font-mono text-2xl font-extrabold text-petroleum-900 tracking-wide select-all my-3">@JGT187</p>
+            <button onclick="copyLlave()" class="w-full py-3 px-4 bg-petroleum-900 hover:bg-petroleum-800 text-gold-400 font-semibold rounded-full shadow-lg transition-all text-xs uppercase tracking-wider inline-flex items-center justify-center gap-2 border border-gold-400/40 active:scale-95">
+                <i id="copyLlaveIcon" class="far fa-copy"></i> <span id="copyLlaveText">Copiar Llave</span>
+            </button>
+            <button onclick="closeBankModal()" class="mt-3 text-xs font-semibold text-petroleum-700 uppercase tracking-wider hover:text-petroleum-900">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- POPUP: ELEGIR A QUIÉN CONFIRMAR POR WHATSAPP -->
+    <div id="whoModal" class="bank-modal" role="dialog" aria-modal="true" aria-labelledby="whoModalTitle" onclick="if (event.target === this) closeWhoModal()">
+        <div class="bank-modal-card glass-card gold-border rounded-3xl p-7 sm:p-9 text-center shadow-2xl">
+            <button onclick="closeWhoModal()" aria-label="Cerrar" class="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center text-petroleum-700 hover:bg-petroleum-50 active:scale-95 transition">
+                <i class="fas fa-times"></i>
+            </button>
+            <p id="whoModalGreeting" class="font-script text-3xl text-gold-500">¡Qué alegría!</p>
+            <h3 id="whoModalTitle" class="text-[11px] text-petroleum-600 uppercase font-bold tracking-widest mt-2 mb-6">¿A quién le quieres confirmar?</h3>
+
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="sendRSVP('juan')" class="who-option group">
+                    <span class="who-icon"><i class="fas fa-user-tie"></i></span>
+                    <span class="font-serif text-xl font-semibold text-petroleum-900">Juan</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-bold">El Novio</span>
+                </button>
+                <button onclick="sendRSVP('valentina')" class="who-option group">
+                    <span class="who-icon"><i class="fas fa-person-dress"></i></span>
+                    <span class="font-serif text-xl font-semibold text-petroleum-900">Valentina</span>
+                    <span class="text-[10px] uppercase tracking-widest text-gold-600 font-bold">La Novia</span>
+                </button>
+            </div>
+
+            <p class="text-[11px] text-petroleum-600 mt-5 flex items-center justify-center gap-1.5">
+                <i class="fab fa-whatsapp text-emerald-500 text-sm"></i> Se abrirá WhatsApp con tu mensaje listo
+            </p>
+        </div>
+    </div>
+
+    <!-- Toast Notification Overlay -->
+    <div id="toast" class="pointer-events-none fixed bottom-28 left-1/2 -translate-x-1/2 bg-petroleum-900 text-cream text-xs px-5 py-3 rounded-full shadow-2xl border border-gold-400/50 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-[90vw] text-center">
+        <span id="toastMsg">Notificación</span>
+    </div>
+
+    <!-- YouTube Iframe API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        // TARGET WEDDING DATE: Tuesday, Nov 24, 2026 at 18:00
+        const weddingDate = new Date("November 24, 2026 18:00:00").getTime();
+
+        // ================== CANCIÓN DE FONDO ==================
+        // Pega aquí el enlace de YouTube de la canción (sirve cualquier formato:
+        // youtube.com/watch?v=..., youtu.be/..., youtube.com/shorts/...)
+        const YOUTUBE_URL = 'https://www.youtube.com/watch?v=eTKeQhYVvbQ';
+        // Segundo desde el que empieza la canción (útil para saltar la intro). 0 = desde el inicio
+        const YOUTUBE_START = 0;
+        // ======================================================
+
+        function getYouTubeId(url) {
+            const m = url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([\w-]{11})/);
+            return m ? m[1] : url.trim();
+        }
+        const YOUTUBE_ID = getYouTubeId(YOUTUBE_URL);
+
+        let ytPlayer = null;
+        let isAudioPlaying = false;
+        let ytApiReady = false;
+
+        // Initialize YouTube Background Audio Player
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('youtube-player', {
+                height: '200',
+                width: '200',
+                videoId: YOUTUBE_ID,
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'start': YOUTUBE_START,
+                    'playsinline': 1
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onError': onPlayerError,
+                    // Al terminar, vuelve a empezar (en bucle)
+                    'onStateChange': e => {
+                        if (e.data === YT.PlayerState.ENDED) {
+                            ytPlayer.seekTo(YOUTUBE_START);
+                            ytPlayer.playVideo();
+                        }
+                    }
+                }
+            });
+        }
+
+        let wantsMusic = false;
+
+        function onPlayerReady(event) {
+            ytApiReady = true;
+            event.target.setVolume(70);
+            // Si el invitado tocó el sobre antes de que YouTube cargara, arranca ahora
+            if (wantsMusic && audioFileOk !== true) playYouTube();
+        }
+
+        function onPlayerError(event) {
+            console.warn('YouTube no pudo reproducir la canción. Código:', event.data);
+            setAudioUI(false);
+            if (location.protocol === 'file:') {
+                showToast('La música suena cuando la invitación está publicada en internet');
+            }
+        }
+
+        // Audio local (musica.mp3). null = aún no se sabe si existe
+        const bgAudio = document.getElementById('bgAudio');
+        let audioFileOk = null;
+        let pausedByVisibility = false;
+        bgAudio.addEventListener('canplay', () => { audioFileOk = true; });
+        bgAudio.addEventListener('error', () => { audioFileOk = false; });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const preloader = document.getElementById('preloaderOverlay');
+                const envelopeOverlay = document.getElementById('envelopeOverlay');
+                preloader.classList.add('opacity-0');
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    envelopeOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                }, 1000);
+            }, 1200);
+        });
+
+        // Smooth scroll to target section
+        function scrollToSection(sectionId) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ===== Navegación con flecha flotante =====
+        const sections = Array.from(document.querySelectorAll('main section'));
+        let currentIndex = 0;
+
+        function getCurrentIndex() {
+            // Al llegar al final de la página, estamos en la última sección
+            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+                return sections.length - 1;
+            }
+            const line = window.innerHeight * 0.45;
+            let idx = 0;
+            sections.forEach((sec, i) => {
+                if (sec.getBoundingClientRect().top <= line) idx = i;
+            });
+            return idx;
+        }
+
+        function updateNav() {
+            currentIndex = getCurrentIndex();
+            const isLast = currentIndex === sections.length - 1;
+            document.getElementById('navLabel').innerText = sections[currentIndex].dataset.nextLabel || 'Siguiente';
+            const icon = document.getElementById('navIcon');
+            icon.classList.toggle('fa-chevron-down', !isLast);
+            icon.classList.toggle('fa-chevron-up', isLast);
+            document.querySelectorAll('#sectionDots button').forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+            // En la sección final (fondo azul) no se usa el degradado crema
+            document.getElementById('bottomFade').style.opacity = isLast ? '0' : '';
+        }
+
+        function goNext() {
+            const isLast = currentIndex === sections.length - 1;
+            if (isLast) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                sections[currentIndex + 1].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function initNavigation() {
+            const dots = document.getElementById('sectionDots');
+            sections.forEach((sec, i) => {
+                const b = document.createElement('button');
+                b.setAttribute('aria-label', 'Ir a sección ' + (i + 1));
+                b.onclick = () => sec.scrollIntoView({ behavior: 'smooth' });
+                dots.appendChild(b);
+            });
+            dots.classList.remove('hidden');
+            document.getElementById('floatingNav').classList.remove('hide');
+            document.getElementById('bottomFade').classList.remove('hide');
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => { updateNav(); ticking = false; });
+                    ticking = true;
+                }
+            }, { passive: true });
+            window.addEventListener('resize', updateNav);
+            updateNav();
+
+            // Oculta la flecha mientras se escribe en el formulario (teclado del celular abierto)
+            const navParts = [document.getElementById('floatingNav'), document.getElementById('bottomFade')];
+            document.addEventListener('focusin', e => {
+                if (e.target.matches('input, select, textarea')) navParts.forEach(el => el.classList.add('hide'));
+            });
+            document.addEventListener('focusout', () => navParts.forEach(el => el.classList.remove('hide')));
+        }
+
+        // ===== Animaciones de aparición al hacer scroll =====
+        function initReveal() {
+            const items = document.querySelectorAll('.reveal');
+            if (!('IntersectionObserver' in window)) {
+                items.forEach(el => el.classList.add('in'));
+                return;
+            }
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            items.forEach(el => io.observe(el));
+        }
+
+        // Audio Toggle Functions
+        function setAudioUI(playing) {
+            isAudioPlaying = playing;
+            document.getElementById('soundBars').classList.toggle('hidden', !playing);
+            document.getElementById('audioStatusText').innerText = playing ? "Sonando" : "Música";
+        }
+
+        function fadeInAudio() {
+            bgAudio.volume = 0;
+            const step = setInterval(() => {
+                bgAudio.volume = Math.min(0.7, bgAudio.volume + 0.05);
+                if (bgAudio.volume >= 0.7) clearInterval(step);
+            }, 120);
+        }
+
+        function playYouTube() {
+            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                ytPlayer.playVideo();
+                setAudioUI(true);
+            }
+        }
+
+        function playBackgroundMusic() {
+            wantsMusic = true;
+            // Si hay un musica.mp3 junto a la invitación, se usa ese
+            if (audioFileOk === true) {
+                const p = bgAudio.play();
+                setAudioUI(true);
+                if (p && p.then) p.then(fadeInAudio).catch(() => setAudioUI(false));
+                return;
+            }
+            // Si no, YouTube: se llama de inmediato para aprovechar el toque del invitado
+            if (location.protocol === 'file:') {
+                showToast('La música suena cuando la invitación está publicada en internet');
+            }
+            playYouTube();
+        }
+
+        function pauseBackgroundMusic() {
+            wantsMusic = false;
+            if (!bgAudio.paused) bgAudio.pause();
+            if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') ytPlayer.pauseVideo();
+            setAudioUI(false);
+        }
+
+        // Pausa la música si el invitado cambia de app o de pestaña, y la retoma al volver
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isAudioPlaying) {
+                pausedByVisibility = true;
+                pauseBackgroundMusic();
+            } else if (!document.hidden && pausedByVisibility) {
+                pausedByVisibility = false;
+                playBackgroundMusic();
+            }
+        });
+
+        function toggleAudio() {
+            if (isAudioPlaying) {
+                pauseBackgroundMusic();
+            } else {
+                playBackgroundMusic();
+            }
+        }
+
+        // Corazoncitos que salen desde el sello al abrir el sobre
+        function burstHearts(origin) {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const r = origin.getBoundingClientRect();
+            const cx = r.left + r.width / 2;
+            const cy = r.top + r.height / 2;
+            const colors = ['#d4af37', '#e6ca65', '#f8f1d3', '#e8a1a8', '#f4c6cb'];
+            const count = window.innerWidth < 640 ? 22 : 30;
+
+            for (let i = 0; i < count; i++) {
+                const size = 10 + Math.random() * 14;
+                const h = document.createElement('div');
+                h.className = 'mini-heart';
+                h.style.left = (cx - size / 2) + 'px';
+                h.style.top = (cy - size / 2) + 'px';
+                h.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 100 92"><path d="M50 88 C22 68 4 52 4 30 C4 14 16 4 30 4 C40 4 47 10 50 17 C53 10 60 4 70 4 C84 4 96 14 96 30 C96 52 78 68 50 88 Z" fill="${colors[i % colors.length]}"/></svg>`;
+                document.body.appendChild(h);
+
+                // Salen en abanico, suben un poco y caen flotando
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 70 + Math.random() * 110;
+                const dx = Math.cos(angle) * dist;
+                const dy = Math.sin(angle) * dist * 0.7 - 40;
+                const rot = (Math.random() - 0.5) * 70;
+                const duration = 1900 + Math.random() * 1000;
+
+                const anim = h.animate([
+                    { transform: 'translate(0, 0) scale(0.2) rotate(0deg)', opacity: 0 },
+                    { transform: `translate(${dx * 0.6}px, ${dy * 0.6}px) scale(1) rotate(${rot / 2}deg)`, opacity: 1, offset: 0.2 },
+                    { transform: `translate(${dx * 0.9}px, ${dy * 0.9 + 30}px) scale(0.95) rotate(${rot * 0.8}deg)`, opacity: 1, offset: 0.65 },
+                    { transform: `translate(${dx}px, ${dy + 90}px) scale(0.8) rotate(${rot}deg)`, opacity: 0 }
+                ], { duration, delay: Math.random() * 180, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'both' });
+                anim.onfinish = () => h.remove();
+            }
+        }
+
+        // Open Envelope Action with 3D Flip & Slide Animation
+        function openEnvelope() {
+            const env = document.getElementById('interactiveEnvelope');
+            const overlay = document.getElementById('envelopeOverlay');
+            const main = document.getElementById('mainInvitation');
+            const audioCtrl = document.getElementById('audioControl');
+
+            if (env.classList.contains('open')) return;
+
+            burstHearts(env.querySelector('.heart-seal'));
+            env.classList.add('open');
+            playBackgroundMusic();
+
+            setTimeout(() => {
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    document.body.classList.remove('locked');
+                    window.scrollTo(0, 0);
+                    main.classList.remove('opacity-0');
+                    audioCtrl.classList.remove('hidden');
+                    initReveal();
+                    initNavigation();
+                }, 800);
+            }, 1100);
+        }
+
+        // Popup de datos bancarios
+        function openBankModal() {
+            document.getElementById('bankModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBankModal() {
+            document.getElementById('bankModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeBankModal();
+                closeWhoModal();
+            }
+        });
+
+        // Copy Bank Key
+        function copyLlave() {
+            copyToClipboard("@JGT187");
+            showToast("¡Llave @JGT187 copiada!");
+            const icon = document.getElementById('copyLlaveIcon');
+            const text = document.getElementById('copyLlaveText');
+            icon.className = 'fas fa-check';
+            text.innerText = '¡Copiada!';
+            setTimeout(() => {
+                icon.className = 'far fa-copy';
+                text.innerText = 'Copiar Llave';
+            }, 2000);
+        }
+
+        // Copy Address Helper
+        function copyAddress() {
+            const address = "Calle 70 # 8 - 25, Tragaluz Asia el Pacífico";
+            copyToClipboard(address);
+            showToast("¡Dirección copiada al portapapeles!");
+        }
+
+        // Copy to Clipboard Utility
+        function copyToClipboard(text) {
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+        }
+
+        // Toast Notification Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Add to Google Calendar Link Generator
+        function addToCalendar() {
+            const title = encodeURIComponent("Boda Laura Valentina & Juan Diego");
+            const details = encodeURIComponent("Celebración de Boda de Laura Valentina Martínez y Juan Diego Gutiérrez");
+            const location = encodeURIComponent("Tragaluz Asia el Pacífico, Calle 70 # 8 - 25");
+            const start = "20261124T180000";
+            const end = "20261125T010000";
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}`;
+            window.open(url, '_blank');
+        }
+
+        // ================== WHATSAPP DE CONFIRMACIÓN ==================
+        // Números con el indicativo de Colombia (57) adelante
+        const RSVP_CONTACTS = {
+            juan: { name: 'Juan', phone: '573013907634' },
+            valentina: { name: 'Valentina', phone: '573133789593' }
+        };
+        // ===============================================================
+
+        // RSVP: al enviar el formulario se pregunta a quién confirmar
+        function submitRSVP(e) {
+            e.preventDefault();
+            document.getElementById('guestName').blur();
+            const attending = document.getElementById('attendance').selectedIndex === 0;
+            document.getElementById('whoModalGreeting').innerText = attending ? '¡Qué alegría!' : '¡Gracias por avisarnos!';
+            document.getElementById('whoModal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeWhoModal() {
+            document.getElementById('whoModal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function sendRSVP(who) {
+            const contact = RSVP_CONTACTS[who];
+            const name = document.getElementById('guestName').value.trim();
+            const attendance = document.getElementById('attendance').value;
+
+            const message =
+                `¡Hola ${contact.name}! 💛\n\n` +
+                `*CONFIRMACIÓN DE ASISTENCIA - BODA VALENTINA & JUAN DIEGO*\n\n` +
+                `*Nombre:* ${name}\n` +
+                `*¿Asistirás?:* ${attendance}`;
+
+            window.open(`https://wa.me/${contact.phone}?text=${encodeURIComponent(message)}`, '_blank');
+            closeWhoModal();
+            showToast(`¡Abriendo WhatsApp de ${contact.name}!`);
+        }
+
+        // Countdown Timer Logic
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById('cd-days').innerText = "00";
+                document.getElementById('cd-hours').innerText = "00";
+                document.getElementById('cd-minutes').innerText = "00";
+                document.getElementById('cd-seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            setCountValue('cd-days', days);
+            setCountValue('cd-hours', hours);
+            setCountValue('cd-minutes', minutes);
+            setCountValue('cd-seconds', seconds);
+        }
+
+        // Actualiza un número del contador con una pequeña animación solo si cambió
+        function setCountValue(id, value) {
+            const el = document.getElementById(id);
+            const text = String(value).padStart(2, '0');
+            if (el.innerText === text) return;
+            el.innerText = text;
+            el.classList.remove('tick');
+            void el.offsetWidth;
+            el.classList.add('tick');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Golden Stardust Particle Canvas Animation
+        const canvas = document.getElementById('stardustCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Menos partículas en celular para que la animación sea fluida
+        const particles = [];
+        const particleCount = window.innerWidth < 640 ? 24 : 40;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2.5 + 0.5,
+                alpha: Math.random() * 0.7 + 0.2,
+                speedY: -(Math.random() * 0.4 + 0.1),
+                speedX: Math.random() * 0.3 - 0.15,
+                pulse: Math.random() * 0.02 + 0.005,
+                color: Math.random() > 0.4 ? 'rgba(212, 175, 55, ' : 'rgba(248, 241, 211, '
+            });
+        }
+
+        function animateStardust() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.alpha += Math.sin(Date.now() * p.pulse) * 0.01;
+
+                if (p.y < -10) {
+                    p.y = canvas.height + 10;
+                    p.x = Math.random() * canvas.width;
+                }
+                if (p.x < -10) p.x = canvas.width + 10;
+                if (p.x > canvas.width + 10) p.x = -10;
+
+                // Halo suave + punto (más liviano que shadowBlur)
+                const a = Math.max(0.1, Math.min(0.8, p.alpha));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius * 2.6, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + (a * 0.18) + ')';
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color + a + ')';
+                ctx.fill();
+            });
+
+            // No dibuja mientras la pestaña está oculta (ahorra batería)
+            if (document.hidden) { stardustRunning = false; return; }
+            requestAnimationFrame(animateStardust);
+        }
+        let stardustRunning = true;
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden && !stardustRunning) {
+                stardustRunning = true;
+                requestAnimationFrame(animateStardust);
+            }
+        });
+
+        animateStardust();
+    </script>
+</body>
+</html>
